@@ -15,8 +15,16 @@ object Word2VecExample {
 
   def main(args: Array[String]) {
 
+    if (args.length != 2){
+      System.err.println("Usage: sbt \"run <filename of strings> query\"")
+      System.err.println("Example: sbt \"run raw_sentences.txt day\"")
+
+      return
+    }
+
     // Gets Path to Text file
-    val filePath = new ClassPathResource("raw_sentences.txt").getFile().getAbsolutePath()
+    val filePath = args(0)
+    val query = args(1)
 
     log.info("Load & Vectorize Sentences....")
     // Strip white space before and after for each line
@@ -52,8 +60,8 @@ object Word2VecExample {
 
     // Prints out the closest 10 words to "day". An example on what to do with these Word Vectors.
     log.info("Closest Words:")
-    val lst = vec.wordsNearest("day", 10)
-    println("10 Words closest to 'day': " + lst)
+    val lst = vec.wordsNearest(query, 10)
+    println(s"10 Words closest to '${query}': " + lst)
   }
 
 }
