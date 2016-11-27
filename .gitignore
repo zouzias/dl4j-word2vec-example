@@ -1,3 +1,5 @@
+pathToWriteto.txt
+.idea/
 *.class
 *.log
 
